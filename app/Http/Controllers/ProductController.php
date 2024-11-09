@@ -68,6 +68,7 @@ class ProductController extends Controller
         $products = Product::all();
 
         // Return products as JSON
-        return response()->json($products);
+        //return response()->json($products);
+        return view('products.jsonResponse', compact('products'));
     }
 }
