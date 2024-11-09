@@ -1,3 +1,14 @@
+<!-- resources/views/layouts/footer.blade.php -->
+<footer>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <p>&copy; {{ date('Y') }} Demo by Krishna Kumar Singh.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
 <!-- Bootstrap JS (optional, for any dynamic Bootstrap features) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Bootstrap JS and dependencies (optional for interactivity) -->

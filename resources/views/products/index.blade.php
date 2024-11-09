@@ -1,7 +1,7 @@
 {{-- Include the header --}}
 @include('products.header')
 
-<div class="container-fluid">
+<div class="container-fluid mt-3">
     <h1>Product List</h1>
 
     <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm mt-3 mb-3">Create New Product</a>
@@ -23,7 +23,7 @@
             @foreach($products as $product)
             <tr>
                 <td>{{ $product->name }}</td>
-                <td>${{ number_format($product->price, 2) }}</td> <!-- Formatting price -->
+                <td>€{{ number_format($product->price, 2) }}</td> <!-- Formatting price -->
                 <td>{{ $product->description }}</td>
                 <td>
                     <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm">Edit</a>

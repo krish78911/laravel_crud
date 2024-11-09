@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
+use App\Services\ProductService;
 use App\Models\Product;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    protected $productService;
+
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
+
     // Display all products
     public function index()
     {
-        $products = Product::all();
+        $products = $this->productService->getAllProducts();
         return view('products.index', compact('products'));
     }
 
@@ -21,15 +29,9 @@ class ProductController extends Controller
     }
 
     // Store a new product
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'description' => 'required|string',
-        ]);
-
-        Product::create($request->all());
+        $this->productService->createProduct($request->validated());
 
         return redirect()->route('products.index')->with('success', 'Product created successfully');
     }
@@ -41,15 +43,9 @@ class ProductController extends Controller
     }
 
     // Update a product
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'description' => 'required|string',
-        ]);
-
-        $product->update($request->all());
+        $this->productService->updateProduct($product, $request->validated());
 
         return redirect()->route('products.index')->with('success', 'Product updated successfully');
     }
@@ -57,18 +53,14 @@ class ProductController extends Controller
     // Delete a product
     public function destroy(Product $product)
     {
-        $product->delete();
+        $this->productService->deleteProduct($product);
 
         return redirect()->route('products.index')->with('success', 'Product deleted successfully');
     }
 
     public function allProductsApi()
     {
-        // Fetch all products
-        $products = Product::all();
-
-        // Return products as JSON
-        //return response()->json($products);
+        $products = $this->productService->getAllProducts();
         return view('products.jsonResponse', compact('products'));
     }
 }
