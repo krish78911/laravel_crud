@@ -21,4 +21,5 @@ Route::get('/', function () {
 Route::resource('products', ProductController::class);
 
 // API route
-Route::get('/api', [ProductController::class, 'allProductsApi'])->name('api');
+Route::get('/api-get', [ProductController::class, 'allProductsApi'])->name('api-get');
+Route::post('/api-post', [ProductController::class, 'postProductApi'])->name('api-post');

@@ -63,4 +63,11 @@ class ProductController extends Controller
         $products = $this->productService->getAllProducts();
         return view('products.jsonResponse', compact('products'));
     }
+
+    public function postProductApi(ProductRequest $request)
+    {
+        echo "sending..";
+        $this->productService->postAPi($request->validated());
+        return response()->json(['message' => 'Product created successfully!', 'product' => $request]);
+    }
 }

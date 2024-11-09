@@ -26,4 +26,14 @@ class ProductService
     {
         return Product::all();
     }
+
+    public function postApi($request)
+    {
+        $data['name'] = $request->input('name');
+        $data['price'] = $request->input('price');
+        $data['description'] = $request->input('description');
+        Product::create($data);
+
+        return response()->json(['message' => 'Product created successfully!', 'product' => $data]);
+    }
 }

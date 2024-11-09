@@ -19,7 +19,7 @@
             <a class="nav-link" href="{{ route('products.create') }}">Create New Product</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('api') }}">API</a>
+            <a class="nav-link" href="{{ route('api-get') }}">API</a>
           </li>
         </ul>
       </div>
