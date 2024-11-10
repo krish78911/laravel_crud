@@ -22,6 +22,18 @@ class ProductService
         $product->delete();
     }
 
+    public function deleteProductById($id)
+    {
+        $product = Product::find($id);
+        
+        if ($product) {
+            $product->delete();
+            return response()->json(['message' => 'Product deleted successfully!']);
+        } else {
+            return response()->json(['message' => 'Product not found!'], 404);
+        }
+    }
+
     public function getAllProducts()
     {
         return Product::all();
@@ -29,9 +41,9 @@ class ProductService
 
     public function postApi($request)
     {
-        $data['name'] = $request->input('name');
-        $data['price'] = $request->input('price');
-        $data['description'] = $request->input('description');
+        $data['name'] = $request['name'];
+        $data['price'] = $request['price'];
+        $data['description'] = $request['description'];
         Product::create($data);
 
         return response()->json(['message' => 'Product created successfully!', 'product' => $data]);

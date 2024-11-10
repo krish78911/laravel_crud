@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Services\ProductService;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -66,8 +67,16 @@ class ProductController extends Controller
 
     public function postProductApi(ProductRequest $request)
     {
-        echo "sending..";
         $this->productService->postAPi($request->validated());
         return response()->json(['message' => 'Product created successfully!', 'product' => $request]);
+    }
+
+    public function deleteProductApi($id)
+    {
+        // Call the service method to delete the product by ID
+        $this->productService->deleteProductById($id);
+
+        // Return a success response
+        return response()->json(['message' => 'Product deleted successfully!', 'product_id' => $id]);
     }
 }
